@@ -2,9 +2,11 @@
 main.py — Punto de entrada del proyecto.
 Ejecuta el ciclo completo de ML:
   1. Carga y análisis exploratorio
-  2. Preprocesamiento
-  3. Entrenamiento de 5 modelos
-  4. Evaluación y generación de reportes
+  2. Elección de medida de éxito
+  3. Protocolo de evaluación
+  4. Preparación de datos
+  5. Entrenamiento de 5 modelos
+  6. Evaluación y generación de reportes
 
 Uso:
     python main.py
@@ -34,15 +36,17 @@ def main():
     # el uso de MAE, RMSE y R² como métricas de evaluación
     exploratory_analysis(df)
 
-    # ── ETAPAS 3-4 · Protocolo de evaluación + Preparación ────────
+    # ── ETAPA 3 · Protocolo de evaluación ─────────────────────────
+    # Define la división train / validation / test antes del entrenamiento
+    # ETAPA 4 · Preparación de datos ──────────────────────────────
     # Limpieza, codificación, normalización y división 70/15/15
     X_train, X_val, X_test, y_train, y_val, y_test, scaler, features = preprocess(df)
 
-    # ── ETAPAS 5-6 · Baseline y entrenamiento ─────────────────────
+    # ── ETAPA 5 · Baseline y entrenamiento ────────────────────────
     # Entrena los 5 algoritmos y los guarda en models/
     trained_models, threshold = train_all(X_train, y_train, X_val, y_val)
 
-    # ── ETAPAS 2-3 · Evaluación final ─────────────────────────────
+    # ── ETAPA 6 · Evaluación final ───────────────────────────────
     # Calcula métricas sobre test, genera gráficas y exporta metrics.csv
     metrics_df = evaluate_all(trained_models, X_test, y_test, threshold)
 

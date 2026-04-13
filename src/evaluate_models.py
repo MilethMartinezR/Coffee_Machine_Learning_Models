@@ -3,13 +3,11 @@ evaluate_models.py
 ==================
 Ciclo de vida ML — etapas cubiertas en este módulo:
 
-  ETAPA 2 · Elección de la medida de éxito (aplicación)
+  ETAPA 6 · Evaluación final sobre conjunto de test
     - Se calculan las métricas definidas en la etapa 2:
         · Modelos de regresión : MAE, RMSE, R²
         · Regresión Logística  : Accuracy, F1-Score
-
-  ETAPA 3 · Protocolo de evaluación (aplicación)
-    - Todas las métricas se calculan sobre el conjunto de TEST
+    - Se aplica el protocolo de evaluación de la etapa 3 sobre el conjunto de TEST
       (datos que los modelos nunca vieron durante el entrenamiento).
     - Se genera la tabla comparativa metrics.csv para el informe.
 
@@ -31,7 +29,7 @@ from sklearn.metrics import (
 from utils import RESULTS_DIR, save_figure, print_section, MODEL_NAMES, COLORS
 
 
-# ── ETAPAS 2-3 · Métricas de éxito sobre conjunto de test ────────────────────
+# ── ETAPA 6 · Evaluación final sobre conjunto de test ─────────────────────
 def evaluate_all(
     trained_models: dict,
     X_test:  np.ndarray,
@@ -43,7 +41,7 @@ def evaluate_all(
     Calcula las métricas de éxito definidas en la ETAPA 2 del ciclo ML.
     Exporta la tabla comparativa a results/metrics.csv.
     """
-    print_section("ETAPAS 2-3 · Evaluación final sobre conjunto de test")
+    print_section("ETAPA 6 · Evaluación final sobre conjunto de test")
 
     # Binarizar target para Regresión Logística (mismo umbral del entrenamiento)
     y_test_bin = (y_test >= threshold).astype(int)
@@ -51,7 +49,7 @@ def evaluate_all(
 
     for name, model in trained_models.items():
         if name == "Regresión Logística":
-            # ETAPA 2 — Métricas de clasificación: Accuracy y F1
+            # ETAPA 6 — Métricas de clasificación definidas en etapa 2: Accuracy y F1
             y_pred = model.predict(X_test)
             acc = accuracy_score(y_test_bin, y_pred)
             f1  = f1_score(y_test_bin, y_pred, zero_division=0)
@@ -65,10 +63,10 @@ def evaluate_all(
                 "R²": "-",
             }
             print(f"  {name:<25}  Acc={acc:.4f}  F1={f1:.4f}")
-            # ETAPA 3 — Visualización: matriz de confusión
+            # ETAPA 6 — Visualización: matriz de confusión
             _plot_confusion_matrix(name, model, X_test, y_test_bin)
         else:
-            # ETAPA 2 — Métricas de regresión: MAE, RMSE, R²
+            # ETAPA 6 — Métricas de regresión definidas en etapa 2: MAE, RMSE, R²
             y_pred = model.predict(X_test)
             mae  = mean_absolute_error(y_test, y_pred)
             rmse = np.sqrt(mean_squared_error(y_test, y_pred))
@@ -83,12 +81,12 @@ def evaluate_all(
                 "R²": round(r2, 4),
             }
             print(f"  {name:<25}  MAE={mae:.2f}  RMSE={rmse:.2f}  R²={r2:.4f}")
-            # ETAPA 3 — Visualización: real vs predicho
+            # ETAPA 6 — Visualización: real vs predicho
             _plot_pred_vs_real(name, y_test, y_pred)
 
         rows.append(row)
 
-    # ETAPA 3 — Exportar tabla comparativa para el informe del parcial
+    # ETAPA 6 — Exportar tabla comparativa para el informe del parcial
     df_metrics = pd.DataFrame(rows)
     metrics_path = f"{RESULTS_DIR}/metrics.csv"
     df_metrics.to_csv(metrics_path, index=False)

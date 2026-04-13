@@ -7,7 +7,7 @@ Ciclo de vida ML — etapas cubiertas en este módulo:
     - Se definen los hiperparámetros iniciales de cada modelo.
     - El baseline más simple es LogisticRegression (clasificación binaria).
 
-  ETAPA 6 · Desarrollo de un buen modelo y ajuste fino de parámetros
+  ETAPA 5 · Desarrollo de un buen modelo y ajuste fino de parámetros
     - Se entrenan los 5 algoritmos requeridos por el parcial:
         · Regresión Logística  (clasificación: ingresos alto/bajo)
         · SVM — SVR con kernel RBF
@@ -38,7 +38,7 @@ def build_models() -> dict:
     """
     Devuelve un diccionario {nombre: estimador} con los 5 algoritmos del parcial.
     Los hiperparámetros son valores iniciales razonables (baseline).
-    En ETAPA 6 se pueden ajustar con GridSearchCV si se desea afinar.
+    En ETAPA 5 se pueden ajustar con GridSearchCV si se desea afinar.
     """
     models = {
         # Clasificador binario (ingresos alto/bajo) — sirve de baseline simple
@@ -70,7 +70,7 @@ def build_models() -> dict:
     return models
 
 
-# ── ETAPA 6 · Entrenamiento y guardado ───────────────────────────────────────
+# ── ETAPA 5 · Entrenamiento y guardado ───────────────────────────────────────
 def train_all(
     X_train: np.ndarray,
     y_train: pd.Series,
@@ -82,7 +82,7 @@ def train_all(
     Evalúa en X_val/y_val para un primer chequeo de rendimiento.
     Guarda cada modelo en models/ con joblib para no reentrenar cada vez.
     """
-    print_section("ETAPAS 5-6 · Baseline y entrenamiento de modelos")
+    print_section("ETAPA 5 · Baseline y entrenamiento de modelos")
 
     models = build_models()
     trained = {}
@@ -96,12 +96,12 @@ def train_all(
         print(f"\n  Entrenando: {name} ...", end=" ")
 
         if name == "Regresión Logística":
-            # ETAPA 6 — fit sobre etiquetas binarias (alto=1 / bajo=0)
+            # ETAPA 5 — fit sobre etiquetas binarias (alto=1 / bajo=0)
             model.fit(X_train, y_train_bin)
             val_score = model.score(X_val, y_val_bin)
             print(f"Accuracy val = {val_score:.4f}")
         else:
-            # ETAPA 6 — fit sobre el valor continuo de ingresos
+            # ETAPA 5 — fit sobre el valor continuo de ingresos
             model.fit(X_train, y_train)
             # R² en validación: primer indicador de si el modelo generaliza
             val_score = model.score(X_val, y_val)
