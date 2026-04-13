@@ -27,7 +27,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from ydata_profiling import ProfileReport
+
+try:
+    from ydata_profiling import ProfileReport
+except Exception:
+    ProfileReport = None
 
 from utils import DATA_PATH, RESULTS_DIR, save_figure, print_section
 
@@ -55,11 +59,14 @@ def exploratory_analysis(df: pd.DataFrame) -> None:
 
     # Reporte automático completo — distribuciones, correlaciones, outliers
     # Esto justifica la elección de métricas de regresión para el parcial
-    print("\n  Generando reporte HTML con ydata-profiling ...")
-    profile = ProfileReport(df, title="Coffee Shop — EDA Report", explorative=True)
-    report_path = f"{RESULTS_DIR}/eda_report.html"
-    profile.to_file(report_path)
-    print(f"  [OK] Reporte guardado: {report_path}")
+    if ProfileReport is not None:
+        print("\n  Generando reporte HTML con ydata-profiling ...")
+        profile = ProfileReport(df, title="Coffee Shop — EDA Report", explorative=True)
+        report_path = f"{RESULTS_DIR}/eda_report.html"
+        profile.to_file(report_path)
+        print(f"  [OK] Reporte guardado: {report_path}")
+    else:
+        print("\n  [WARN] ydata-profiling no disponible; se omite el reporte HTML.")
 
     # Visualizar distribución del target (ingresos)
     # Si es simétrica → RMSE es adecuado; si tiene sesgo → preferir MAE

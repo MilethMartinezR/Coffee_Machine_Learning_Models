@@ -1,0 +1,6 @@
+Modelo,Tipo,Accuracy,F1-Score,MAE,RMSE,R²
+Regresión Logística,Clasificación,0.9,0.9007,-,-,-
+SVM,Regresión,-,-,409.3587,553.1426,0.673
+Árbol de Decisión,Regresión,-,-,241.1717,302.5834,0.9022
+Random Forest,Regresión,-,-,176.6318,220.9681,0.9478
+Red Neuronal,Regresión,-,-,202.8946,249.5049,0.9335
