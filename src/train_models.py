@@ -3,11 +3,11 @@ train_models.py
 ===============
 Ciclo de vida ML — etapas cubiertas en este módulo:
 
-  ETAPA 5 · Desarrollo de un punto de referencia (baseline)
+  ETAPA 5 · Desarrollo de un punto de referencia del modelo.
     - Se definen los hiperparámetros iniciales de cada modelo.
     - El baseline más simple es LogisticRegression (clasificación binaria).
 
-  ETAPA 5 · Desarrollo de un buen modelo y ajuste fino de parámetros
+  ETAPA 6 · Desarrollo de un buen modelo y ajuste fino de sus parámetros.
     - Se entrenan los 5 algoritmos requeridos por el parcial:
         · Regresión Logística  (clasificación: ingresos alto/bajo)
         · SVM — SVR con kernel RBF
@@ -33,7 +33,7 @@ from sklearn.neural_network import MLPRegressor
 from utils import MODELS_DIR, print_section
 
 
-# ── ETAPA 5 · Baseline — definición de modelos ───────────────────────────────
+# ── ETAPA 5 · Desarrollo de un punto de referencia del modelo ──────────────
 def build_models() -> dict:
     """
     Devuelve un diccionario {nombre: estimador} con los 5 algoritmos del parcial.
@@ -70,7 +70,7 @@ def build_models() -> dict:
     return models
 
 
-# ── ETAPA 5 · Entrenamiento y guardado ───────────────────────────────────────
+# ── ETAPA 6 · Desarrollo de un buen modelo y ajuste fino de sus parámetros ─
 def train_all(
     X_train: np.ndarray,
     y_train: pd.Series,
@@ -82,7 +82,7 @@ def train_all(
     Evalúa en X_val/y_val para un primer chequeo de rendimiento.
     Guarda cada modelo en models/ con joblib para no reentrenar cada vez.
     """
-    print_section("ETAPA 5 · Baseline y entrenamiento de modelos")
+    print_section("ETAPA 6 · Desarrollo de un buen modelo y ajuste fino de sus parámetros")
 
     models = build_models()
     trained = {}

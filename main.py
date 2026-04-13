@@ -1,12 +1,12 @@
 """
 main.py — Punto de entrada del proyecto.
 Ejecuta el ciclo completo de ML:
-  1. Carga y análisis exploratorio
-  2. Elección de medida de éxito
-  3. Protocolo de evaluación
-  4. Preparación de datos
-  5. Entrenamiento de 5 modelos
-  6. Evaluación y generación de reportes
+  1. Recopilación de datos.
+  2. Elección de una medida o indicador del éxito.
+  3. Establecimiento de un protocolo de evaluación.
+  4. Preparación de los datos.
+  5. Desarrollo de un punto de referencia del modelo.
+  6. Desarrollo de un buen modelo y ajuste fino de sus parámetros.
 
 Uso:
     python main.py
@@ -31,22 +31,22 @@ def main():
     # Carga el CSV y muestra estructura general del dataset
     df = load_data()
 
-    # ── ETAPA 2 · Elección de la medida de éxito ──────────────────
+    # ── ETAPA 2 · Elección de una medida o indicador del éxito ─────
     # EDA para entender la distribución del target y justificar
     # el uso de MAE, RMSE y R² como métricas de evaluación
     exploratory_analysis(df)
 
-    # ── ETAPA 3 · Protocolo de evaluación ─────────────────────────
+    # ── ETAPA 3 · Establecimiento de un protocolo de evaluación ────
     # Define la división train / validation / test antes del entrenamiento
-    # ETAPA 4 · Preparación de datos ──────────────────────────────
+    # ── ETAPA 4 · Preparación de los datos ─────────────────────────
     # Limpieza, codificación, normalización y división 70/15/15
     X_train, X_val, X_test, y_train, y_val, y_test, scaler, features = preprocess(df)
 
-    # ── ETAPA 5 · Baseline y entrenamiento ────────────────────────
-    # Entrena los 5 algoritmos y los guarda en models/
+    # ── ETAPA 5 · Desarrollo de un punto de referencia del modelo ───
+    # ── ETAPA 6 · Desarrollo de un buen modelo y ajuste fino de sus parámetros ─
     trained_models, threshold = train_all(X_train, y_train, X_val, y_val)
 
-    # ── ETAPA 6 · Evaluación final ───────────────────────────────
+    # ── Evaluación final del modelo afinado
     # Calcula métricas sobre test, genera gráficas y exporta metrics.csv
     metrics_df = evaluate_all(trained_models, X_test, y_test, threshold)
 

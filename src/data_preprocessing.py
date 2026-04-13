@@ -6,11 +6,11 @@ Ciclo de vida ML — etapas cubiertas en este módulo:
   ETAPA 1 · Recopilación de datos
     - Carga el CSV y muestra su estructura (filas, columnas, tipos).
 
-  ETAPA 2 · Elección de la medida de éxito
+  ETAPA 2 · Elección de una medida o indicador del éxito
     - Genera el reporte EDA (ydata-profiling) para entender la distribución
       del target y decidir métricas apropiadas (MAE, RMSE, R²).
 
-  ETAPA 3 · Establecimiento del protocolo de evaluación
+  ETAPA 3 · Establecimiento de un protocolo de evaluación
     - Define la división train / validation / test (70 / 15 / 15).
     - El scaler se ajusta SOLO en train para evitar data leakage.
 

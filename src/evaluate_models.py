@@ -1,9 +1,9 @@
 """
 evaluate_models.py
 ==================
-Ciclo de vida ML — etapas cubiertas en este módulo:
+Ciclo de vida ML — este módulo aplica la evaluación final posterior a la etapa 6:
 
-  ETAPA 6 · Evaluación final sobre conjunto de test
+  Evaluación de los modelos afinados:
     - Se calculan las métricas definidas en la etapa 2:
         · Modelos de regresión : MAE, RMSE, R²
         · Regresión Logística  : Accuracy, F1-Score
@@ -29,7 +29,7 @@ from sklearn.metrics import (
 from utils import RESULTS_DIR, save_figure, print_section, MODEL_NAMES, COLORS
 
 
-# ── ETAPA 6 · Evaluación final sobre conjunto de test ─────────────────────
+# ── Evaluación final posterior a la etapa 6 — conjunto de test ───────────
 def evaluate_all(
     trained_models: dict,
     X_test:  np.ndarray,
@@ -41,7 +41,7 @@ def evaluate_all(
     Calcula las métricas de éxito definidas en la ETAPA 2 del ciclo ML.
     Exporta la tabla comparativa a results/metrics.csv.
     """
-    print_section("ETAPA 6 · Evaluación final sobre conjunto de test")
+    print_section("Evaluación final posterior a la etapa 6")
 
     # Binarizar target para Regresión Logística (mismo umbral del entrenamiento)
     y_test_bin = (y_test >= threshold).astype(int)
