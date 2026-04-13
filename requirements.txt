@@ -1,7 +1,12 @@
 pandas==2.2.2
 numpy==1.26.4
 scikit-learn==1.5.0
-matplotlib==3.9.0
+matplotlib>=3.4,<3.9
 seaborn==0.13.2
 joblib==1.4.2
-ydata-profiling==4.8.3
+ydata-profiling==4.8.3; python_version < "3.12"
+ydata-profiling>=4.12,<5; python_version >= "3.12"
+scipy==1.10.1; python_version < "3.12"
+scipy>=1.11,<1.18; python_version >= "3.12"
+statsmodels==0.14.0; python_version < "3.12"
+statsmodels>=0.14.2,<0.15; python_version >= "3.12"

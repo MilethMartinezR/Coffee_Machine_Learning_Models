@@ -23,9 +23,7 @@ from utils               import print_section
 
 
 def main():
-    print("\n" + "█" * 60)
     print("  PROYECTO ML — PREDICCIÓN DE INGRESOS DE CAFETERÍAS")
-    print("█" * 60)
 
     # ── ETAPA 1 · Recopilación de datos ───────────────────────────
     # Carga el CSV y muestra estructura general del dataset
